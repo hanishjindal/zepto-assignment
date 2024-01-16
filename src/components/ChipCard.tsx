@@ -126,7 +126,13 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
                 </span>
             </div>
 
-            <span className='text-sm text-gray-400 py-2'>{INPUT_INFO}</span>
+            <div className="w-full flex justify-between gap-10 py-2">
+                <span className='text-sm text-gray-400'>{INPUT_INFO}</span>
+                <div className='flex flex-col'>
+                    <span className='text-sm text-gray-400'>Name: Hanish Jindal</span>
+                    <span className='text-sm text-gray-400'>Email:&nbsp; hanishjindals@gmail.com</span>
+                </div>
+            </div>
         </div>
     )
 }
