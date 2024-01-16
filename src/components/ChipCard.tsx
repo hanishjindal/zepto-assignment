@@ -15,6 +15,7 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
     const [inputUser, setInputUser] = useState('');
     const [isBackspacePressed, setIsBackspacePressed] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const ModalRef = useRef<HTMLInputElement | null>(null);
 
     const handleSelect = (id: number) => {
         // Add the selected user to userSelected
@@ -90,6 +91,7 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
                     e.stopPropagation()
                     setInputFocus(true)
                 }}
+                ref={ModalRef}
             >
                 {
                     userSelected?.map((user, index) => {
@@ -115,7 +117,14 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
                     />
 
                     {inputFocus ?
-                        <SelectDropdown nameList={userList} handleSelect={handleSelect} inputUser={inputUser} />
+                        <SelectDropdown
+                            nameList={userList}
+                            handleSelect={handleSelect}
+                            inputUser={inputUser}
+                            modalRef={ModalRef}
+                            userList={userList}
+                            dropdownRef={inputRef}
+                        />
                         :
                         null
                     }
