@@ -11,7 +11,7 @@ interface ChipProps {
 
 const Chip: FC<ChipProps> = ({ name, handleRemove, id, highlight }) => {
     return (
-        <div className={`bg-gray-300 text-gray-600 font-medium pr-2 w-fit rounded-full flex justify-center items-center gap-1 border cursor-default ${highlight ? 'bg-gray-500 text-gray-900' : ''}`}>
+        <div className={`bg-gray-300 text-gray-600 font-medium pr-2 w-fit rounded-full flex justify-center items-center gap-1 border cursor-default ${highlight ? 'outline-blue-500 outline outline-offset-2 outline-2' : ''}`}>
             <RandomAvatar name={name + name} size={35} mode='colors' />
             <span className='ml-1'>{name}</span>
             <span
