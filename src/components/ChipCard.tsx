@@ -96,7 +96,7 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
                     <input
                         ref={inputRef}
                         type='text'
-                        className='text-1xl'
+                        className='text-1xl focus-visible:outline-none'
                         value={inputUser}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
