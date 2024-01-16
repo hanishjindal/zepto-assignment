@@ -13,7 +13,7 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
     const [userSelected, setUserSelected] = useState<nameListType[]>([]);
     const [userList, setUserList] = useState<nameListType[]>(NAME_LIST);
     const [inputUser, setInputUser] = useState('');
-    const [isEscapePressed, setIsEscapePressed] = useState(false);
+    const [isBackspacePressed, setIsBackspacePressed] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleSelect = (id: number) => {
@@ -25,7 +25,7 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
         const remainingUsers = NAME_LIST.filter(user => !tempUserSelectedList.includes(user));
         setUserList(remainingUsers);
         setInputUser('');
-        setIsEscapePressed(false);
+        setIsBackspacePressed(false);
     }
 
 
@@ -37,7 +37,7 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
         // Add the removed user back to userList
         const removedUser = userSelected[id];
         setUserList(prevUserList => [...prevUserList, removedUser]);
-        setIsEscapePressed(false);
+        setIsBackspacePressed(false);
     }
 
     useEffect(() => {
@@ -56,17 +56,29 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
         // Filter the remainingUsers based on the input value
         const filteredUsers = remainingUsers.filter(user => user.name.toLowerCase().includes(inputValue.toLowerCase()));
         setUserList(filteredUsers);
-        setIsEscapePressed(false);
+        setIsBackspacePressed(false);
+
+        // Dynamically adjust the width of the input field
+        if (inputRef.current) {
+            inputRef.current.style.width = `${(inputValue.length + 1) * 7.2}px`;
+        }
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Backspace' && inputUser === '') {
-            setIsEscapePressed(prevState => !prevState);
+            setIsBackspacePressed(prevState => !prevState);
 
-            if (isEscapePressed && userSelected.length > 0) {
+            if (isBackspacePressed && userSelected.length > 0) {
                 handleRemove(userSelected?.length - 1 ?? 0)
-                setIsEscapePressed(false);
+                setIsBackspacePressed(false);
             }
+        }
+        // Reset input field and backspace focus
+        if (e.key === 'Escape') {
+            setIsBackspacePressed(false);
+            setInputUser('');
+            const remainingUsers = NAME_LIST.filter(user => !userSelected.includes(user));
+            setUserList(remainingUsers)
         }
     }
 
@@ -87,16 +99,16 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
                                 name={user?.name}
                                 handleRemove={handleRemove}
                                 id={index}
-                                highlight={(isEscapePressed && index === userSelected.length - 1)}
+                                highlight={(isBackspacePressed && index === userSelected.length - 1)}
                             />
                         )
                     })
                 }
-                <span className='w-10 relative'>
+                <span className='w-fit relative'>
                     <input
                         ref={inputRef}
                         type='text'
-                        className='text-1xl focus-visible:outline-none'
+                        className='text-1xl focus-visible:outline-none w-1'
                         value={inputUser}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
