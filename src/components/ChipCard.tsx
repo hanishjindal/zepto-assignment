@@ -97,15 +97,16 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
                         ref={inputRef}
                         type='text'
                         className='text-1xl'
-                        style={{ width: 'fit-content' }}
                         value={inputUser}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
                     />
 
                     {/* <span className='text-2xl caret'>|</span> */}
-                    {inputFocus &&
+                    {inputFocus ?
                         <SelectDropdown nameList={userList} handleSelect={handleSelect} inputUser={inputUser} />
+                        :
+                        null
                     }
                 </span>
             </div>

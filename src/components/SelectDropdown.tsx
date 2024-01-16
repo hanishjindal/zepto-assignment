@@ -11,7 +11,7 @@ interface SelectProps {
 
 const SelectDropdown: FC<SelectProps> = ({ nameList, handleSelect, inputUser }) => {
     return (
-        <div className='border-2 rounded-md flex flex-col max-h-[200px] min-w-[400px] w-fit overflow-auto absolute right-auto bg-white'>
+        <div className='border-2 rounded-md flex flex-col max-h-[200px] min-w-[400px] w-fit overflow-auto absolute bg-white'>
             {nameList.length > 0 ?
                 nameList?.map((name, idx) => {
                     return (

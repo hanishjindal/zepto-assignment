@@ -18,7 +18,7 @@ const HighlightedText: FC<HighlightedTextProps> = ({ text, highlight }) => {
     return (
         <span>
             {beforeHighlight}
-            <span className="text-gray-400 font-semibold">{highlighted}</span>
+            <span className="text-gray-400 font-semibold bg-gray-100">{highlighted}</span>
             {afterHighlight}
         </span>
     );
