@@ -32,8 +32,8 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
         const updatedUserSelected = userSelected.filter((user, index) => index !== id);
         setUserSelected(updatedUserSelected);
 
-        const removedUser = userSelected[id];
-        setUserList(prevUserList => [...prevUserList, removedUser]);
+        const updatedList = NAME_LIST.filter(user => !updatedUserSelected.includes(user));;
+        setUserList(updatedList);
         setIsBackspacePressed(false);
     }
 
