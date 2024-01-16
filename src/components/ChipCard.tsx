@@ -102,7 +102,6 @@ const ChipCard: FC<ChipCardProps> = ({ inputFocus, setInputFocus }) => {
                         onKeyDown={handleKeyDown}
                     />
 
-                    {/* <span className='text-2xl caret'>|</span> */}
                     {inputFocus ?
                         <SelectDropdown nameList={userList} handleSelect={handleSelect} inputUser={inputUser} />
                         :
